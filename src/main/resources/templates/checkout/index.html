@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout – FreshMart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .payment-tab{cursor:pointer;border:2px solid #ddd;border-radius:10px;padding:1rem;transition:.2s;display:block}
+        .payment-tab:hover{border-color:var(--green-mid)}
+        .payment-tab.active{border-color:var(--green-dark);background:#f0faf0}
+        .card-preview{background:linear-gradient(135deg,#1a6b3c,#2d9e5f);border-radius:16px;padding:1.5rem;color:white;font-family:monospace;margin-bottom:1rem}
+        .card-preview .card-num{font-size:1.2rem;letter-spacing:3px;margin:.8rem 0 .5rem}
+        .card-label{font-size:.7rem;opacity:.7;text-transform:uppercase}
+        .summary-item{display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:.9rem}
+        .summary-total{display:flex;justify-content:space-between;padding:.7rem 0 0;font-size:1.1rem;font-weight:700;color:var(--green-dark)}
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" th:href="@{/}">Fresh<span>Mart</span> 🌿</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" th:href="@{/checkout}">💳 Checkout</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/cart}">🛍️ Cart</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/checkout}">✅ Confirmation</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <h2>💳 Checkout</h2>
+    <p class="text-muted mb-0">Complete delivery details, validate card payment, or choose cash on delivery.</p>
+  </div>
+</div>
+
+<div class="container pb-5">
+  <div th:if="${error}" class="alert alert-danger auto-dismiss mb-3" th:text="${error}"></div>
+
+  <form th:action="@{/checkout/place}" method="post" id="checkoutForm">
+  <div class="row g-4">
+
+    <!-- LEFT COLUMN -->
+    <div class="col-lg-7">
+
+      <!-- Delivery -->
+      <div class="form-card mb-4">
+        <h5 style="font-family:'Fraunces',serif;color:var(--green-dark);margin-bottom:1.2rem">🚚 Delivery Details</h5>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" th:value="${user.name}" disabled style="background:#f5f5f5">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-control" th:value="${user.phone}" disabled style="background:#f5f5f5">
+          </div>
+          <div class="col-12">
+            <label class="form-label">Delivery Address <span style="color:red">*</span></label>
+            <textarea name="deliveryAddress" class="form-control" rows="3"
+                      placeholder="Enter your full delivery address..." required></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="form-card">
+        <h5 style="font-family:'Fraunces',serif;color:var(--green-dark);margin-bottom:1.2rem">💳 Payment Method</h5>
+
+        <div class="row g-3 mb-4">
+          <div class="col-6">
+            <label class="payment-tab active text-center" id="tab-card">
+              <input type="radio" name="paymentMethod" value="card" checked style="display:none">
+              <div style="font-size:2rem">💳</div>
+              <div style="font-weight:600;margin-top:.3rem">Card Payment</div>
+              <div style="font-size:.78rem;color:gray">Visa / Mastercard</div>
+            </label>
+          </div>
+          <div class="col-6">
+            <label class="payment-tab text-center" id="tab-cash">
+              <input type="radio" name="paymentMethod" value="cash" style="display:none">
+              <div style="font-size:2rem">💵</div>
+              <div style="font-weight:600;margin-top:.3rem">Cash on Delivery</div>
+              <div style="font-size:.78rem;color:gray">Pay when delivered</div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Card Fields -->
+        <div id="cardFields">
+          <div class="card-preview">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:.82rem;opacity:.8">FreshMart Secure Pay</span>
+              <span style="font-size:1.3rem">💳</span>
+            </div>
+            <div class="card-num" id="previewNum">•••• •••• •••• ••••</div>
+            <div style="display:flex;justify-content:space-between">
+              <div>
+                <div class="card-label">Card Holder</div>
+                <div id="previewName" style="font-size:.9rem">YOUR NAME</div>
+              </div>
+              <div style="text-align:right">
+                <div class="card-label">Expires</div>
+                <div id="previewExpiry" style="font-size:.9rem">MM/YY</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label">Card Number</label>
+              <input type="text" name="cardNumber" id="cardNumber" class="form-control"
+                     placeholder="1234 5678 9012 3456" maxlength="19" required>
+              <div class="invalid-feedback">Enter a valid 16-digit card number.</div>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Cardholder Name</label>
+              <input type="text" name="cardName" id="cardName" class="form-control"
+                     placeholder="Name as on card" required>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Expiry (MM/YY)</label>
+              <input type="text" name="cardExpiry" id="cardExpiry" class="form-control"
+                     placeholder="MM/YY" maxlength="5" required>
+              <div class="invalid-feedback">Enter a valid expiry date.</div>
+            </div>
+            <div class="col-6">
+              <label class="form-label">CVV</label>
+              <input type="password" name="cardCvv" id="cardCvv" class="form-control"
+                     placeholder="•••" maxlength="4" required>
+              <div class="invalid-feedback">Enter 3 or 4 digit CVV.</div>
+            </div>
+          </div>
+          <div style="background:#fff8e1;border-radius:8px;padding:.7rem 1rem;margin-top:1rem;font-size:.82rem;color:#7a6000">
+            🔒 Your payment is encrypted and secure.
+          </div>
+        </div>
+
+        <!-- Cash Fields -->
+        <div id="cashFields" style="display:none">
+          <div style="background:var(--green-pale);border-radius:10px;padding:1.5rem;text-align:center">
+            <div style="font-size:2.5rem">💵</div>
+            <div style="font-weight:600;color:var(--green-dark);margin-top:.5rem">Cash on Delivery</div>
+            <div style="font-size:.88rem;color:gray;margin-top:.3rem">Please have the exact amount ready at delivery.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Summary -->
+    <div class="col-lg-5">
+      <div style="background:var(--green-pale);border-radius:var(--radius-lg);padding:1.5rem;position:sticky;top:1rem">
+        <h5 style="font-family:'Fraunces',serif;color:var(--green-dark);margin-bottom:1.2rem">🧾 Order Summary</h5>
+
+        <div th:if="${cart != null}">
+          <div th:each="item : ${cart.items}" class="summary-item">
+            <span>
+              <span th:text="${item.productName}"></span>
+              <span style="color:gray" th:text="' x' + ${item.quantity}"></span>
+            </span>
+            <span th:text="${item.formattedSubtotal}"></span>
+          </div>
+          <div class="summary-total">
+            <span>Total</span>
+            <span th:text="${cart.formattedTotal}"></span>
+          </div>
+        </div>
+
+        <div th:if="${cart == null or cart.items.isEmpty()}" style="color:gray;font-size:.9rem">
+          Your cart is empty.
+        </div>
+
+        <div style="background:white;border-radius:8px;padding:.8rem 1rem;margin-top:1rem;font-size:.83rem;color:var(--green-dark)">
+          ✅ <strong>Instant Confirmation</strong> — Your order is confirmed immediately after payment. No waiting for admin approval!<br>
+          🕐 Estimated delivery: 2–4 hours
+        </div>
+
+        <div class="d-flex gap-2 mt-3">
+          <a th:href="@{/cart}" class="btn-fresh-outline flex-fill text-center" style="padding:.6rem">← Cart</a>
+          <button type="submit" id="placeBtn" class="btn-amber flex-fill" style="font-size:1rem">
+            ✓ Confirm &amp; Pay
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </form>
+</div>
+
+<footer><strong>FreshMart</strong> 🌿 Fresh groceries, delivered with care.</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/main.js}"></script>
+<script>
+  function selectPayment(method) {
+    var isCard = method === 'card';
+    document.getElementById('cardFields').style.display = isCard ? 'block' : 'none';
+    document.getElementById('cashFields').style.display = isCard ? 'none' : 'block';
+    document.getElementById('tab-card').classList.toggle('active', isCard);
+    document.getElementById('tab-cash').classList.toggle('active', !isCard);
+    document.querySelectorAll('input[name=paymentMethod]').forEach(function(r){ r.checked = (r.value === method); });
+    ['cardNumber','cardName','cardExpiry','cardCvv'].forEach(function(id){
+      document.getElementById(id).required = isCard;
+    });
+    document.getElementById('placeBtn').textContent = isCard ? '✓ Confirm & Pay' : '✓ Place Order';
+  }
+
+  document.getElementById('tab-card').addEventListener('click', function(){ selectPayment('card'); });
+  document.getElementById('tab-cash').addEventListener('click', function(){ selectPayment('cash'); });
+
+  // Card number formatting
+  document.getElementById('cardNumber').addEventListener('input', function() {
+    var v = this.value.replace(/\D/g,'').substring(0,16);
+    this.value = v.replace(/(.{4})/g,'$1 ').trim();
+    var d = v.padEnd(16,'•');
+    document.getElementById('previewNum').textContent =
+      d.substring(0,4)+' '+d.substring(4,8)+' '+d.substring(8,12)+' '+d.substring(12,16);
+  });
+
+  // Cardholder name
+  document.getElementById('cardName').addEventListener('input', function() {
+    document.getElementById('previewName').textContent = this.value.toUpperCase() || 'YOUR NAME';
+  });
+
+  // Expiry formatting
+  document.getElementById('cardExpiry').addEventListener('input', function() {
+    var v = this.value.replace(/\D/g,'').substring(0,4);
+    if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2);
+    this.value = v;
+    document.getElementById('previewExpiry').textContent = v || 'MM/YY';
+  });
+
+  // CVV digits only
+  document.getElementById('cardCvv').addEventListener('input', function() {
+    this.value = this.value.replace(/\D/g,'');
+  });
+</script>
+</body>
+</html>
