@@ -1,0 +1,32 @@
+# FreshMart Products File
+# Format: id|name|category|price|stock|description|imageEmoji|createdAt
+1|Basmati Rice (5kg)|Grains|8.99|150|Premium long-grain basmati rice, perfect for biriyani and pilaf|🌾|2025-01-01 09:00
+2|White Sugar (1kg)|Sweeteners|2.49|200|Pure refined white sugar for cooking and baking|🍬|2025-01-01 09:00
+3|Brown Sugar (1kg)|Sweeteners|2.99|180|Natural brown sugar with rich molasses flavour|🟫|2025-01-01 09:00
+4|Full Cream Milk (1L)|Dairy|1.89|120|Fresh full cream cow's milk, pasteurized daily|🥛|2025-01-01 09:00
+5|Farm Fresh Eggs (12)|Dairy|4.49|90|Free-range large eggs from local farms|🥚|2025-01-01 09:00
+6|Butter (250g)|Dairy|3.29|75|Unsalted creamy butter, great for baking|🧈|2025-01-01 09:00
+7|Cheddar Cheese (200g)|Dairy|5.99|60|Mature cheddar, sharp and full of flavour|🧀|2025-01-01 09:00
+8|Carrots (1kg)|Vegetables|1.99|100|Fresh organic carrots, washed and ready to cook|🥕|2025-01-01 09:00
+9|Tomatoes (500g)|Vegetables|2.29|80|Ripe red tomatoes, juicy and fresh|🍅|2025-01-01 09:00
+10|Broccoli (500g)|Vegetables|2.79|65|Fresh green broccoli florets, nutrient-rich|🥦|2025-01-01 09:00
+11|Spinach (200g)|Vegetables|1.79|70|Tender baby spinach leaves, washed and ready|🥬|2025-01-01 09:00
+12|Potatoes (2kg)|Vegetables|3.49|150|White potatoes, great for roasting and mashing|🥔|2025-01-01 09:00
+13|Onions (1kg)|Vegetables|1.49|200|Brown onions, a kitchen staple|🧅|2025-01-01 09:00
+14|Garlic (250g)|Vegetables|1.99|180|Fresh garlic bulbs, aromatic and flavourful|🧄|2025-01-01 09:00
+15|Bananas (1kg)|Fruits|1.69|130|Sweet ripe bananas, energy-packed snack|🍌|2025-01-01 09:00
+16|Apples (1kg)|Fruits|3.49|110|Crisp red apples, fresh from the orchard|🍎|2025-01-01 09:00
+17|Oranges (1kg)|Fruits|2.99|95|Juicy navel oranges, rich in Vitamin C|🍊|2025-01-01 09:00
+18|Watermelon (whole)|Fruits|5.99|40|Sweet seedless watermelon, perfect for summer|🍉|2025-01-01 09:00
+19|Strawberries (250g)|Fruits|3.99|55|Fresh ripe strawberries, sweet and tangy|🍓|2025-01-01 09:00
+20|Chicken Breast (500g)|Meat|7.49|80|Boneless skinless chicken breast, lean protein|🍗|2025-01-01 09:00
+21|Beef Mince (500g)|Meat|8.99|60|Fresh 100% beef mince, great for bolognese|🥩|2025-01-01 09:00
+22|White Bread (loaf)|Bakery|2.49|50|Soft sliced white bread, freshly baked|🍞|2025-01-01 09:00
+23|Whole Wheat Bread|Bakery|3.29|45|Nutritious wholegrain loaf, high in fibre|🍞|2025-01-01 09:00
+24|Coconut Oil (500ml)|Oils|6.99|70|Pure virgin coconut oil for cooking|🫙|2025-01-01 09:00
+25|Olive Oil (500ml)|Oils|9.49|65|Extra virgin olive oil, cold-pressed|🫒|2025-01-01 09:00
+26|Spaghetti (500g)|Grains|2.19|120|Italian-style semolina spaghetti pasta|🍝|2025-01-01 09:00
+27|Oats (1kg)|Grains|4.29|100|Rolled oats, perfect for porridge and granola|🥣|2025-01-01 09:00
+28|Honey (500g)|Sweeteners|7.99|50|Pure natural wildflower honey|🍯|2025-01-01 09:00
+29|Yoghurt (500g)|Dairy|2.99|85|Creamy natural yoghurt, live cultures|🥛|2025-01-01 09:00
+30|Lemon (500g)|Fruits|2.49|90|Fresh sour lemons, perfect for drinks and cooking|🍋|2025-01-01 09:00

@@ -1,0 +1,571 @@
+/* =============================================
+   FreshMart Grocery – Global Stylesheet
+   Theme: Fresh, Natural, Organic Market
+   Fonts: Fraunces (display) + DM Sans (body)
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ---- CSS Variables ---- */
+:root {
+    --green-dark:   #1a4a2e;
+    --green-mid:    #2d6a4f;
+    --green:        #40916c;
+    --green-light:  #74c69d;
+    --green-pale:   #d8f3dc;
+    --cream:        #fefae0;
+    --warm-white:   #f8f4ef;
+    --amber:        #e9a900;
+    --amber-light:  #fff3cd;
+    --red-soft:     #c0392b;
+    --text-dark:    #1a1a1a;
+    --text-mid:     #4a4a4a;
+    --text-light:   #888;
+    --border:       #e0dbd4;
+    --shadow-sm:    0 2px 8px rgba(0,0,0,.07);
+    --shadow-md:    0 6px 24px rgba(0,0,0,.10);
+    --shadow-lg:    0 16px 48px rgba(0,0,0,.14);
+    --radius:       12px;
+    --radius-sm:    8px;
+    --radius-lg:    20px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--text-dark);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ---- Typography ---- */
+h1, h2, h3, h4, .brand-text {
+    font-family: 'Fraunces', serif;
+}
+
+/* ---- Navbar ---- */
+.navbar {
+    background: var(--green-dark) !important;
+    padding: 0.75rem 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--cream) !important;
+    letter-spacing: -0.5px;
+}
+
+.navbar-brand span {
+    color: var(--green-light);
+}
+
+.navbar .nav-link {
+    color: rgba(255,255,255,.8) !important;
+    font-weight: 500;
+    font-size: 0.92rem;
+    padding: 0.5rem 0.9rem !important;
+    border-radius: var(--radius-sm);
+    transition: all .2s;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+    color: white !important;
+    background: rgba(255,255,255,.1);
+}
+
+.cart-badge {
+    background: var(--amber);
+    color: #000;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 50%;
+    padding: 2px 6px;
+    margin-left: 4px;
+}
+
+/* ---- Hero ---- */
+.hero-section {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 60%, var(--green) 100%);
+    color: white;
+    padding: 4rem 0 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(116,198,157,.2) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.hero-section h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.hero-section p {
+    font-size: 1.1rem;
+    opacity: 0.85;
+}
+
+/* ---- Buttons ---- */
+.btn-fresh {
+    background: var(--green);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all .2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-fresh:hover {
+    background: var(--green-mid);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-fresh-outline {
+    background: transparent;
+    color: var(--green);
+    border: 2px solid var(--green);
+    padding: 0.55rem 1.4rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-fresh-outline:hover {
+    background: var(--green);
+    color: white;
+}
+
+.btn-amber {
+    background: var(--amber);
+    color: #111;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-amber:hover {
+    background: #d4960a;
+    color: #111;
+    transform: translateY(-1px);
+}
+
+.btn-danger-soft {
+    background: #fce8e8;
+    color: var(--red-soft);
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    font-size: 0.85rem;
+}
+
+.btn-danger-soft:hover { background: #f8d0d0; }
+
+/* ---- Product Cards ---- */
+.product-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    transition: all .3s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--green-light);
+}
+
+.product-img-wrap {
+    background: var(--green-pale);
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 5rem;
+    line-height: 1;
+}
+
+.product-img-wrap img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.product-body {
+    padding: 1.1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-category {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--green);
+    background: var(--green-pale);
+    padding: 2px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.product-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0.25rem 0;
+    color: var(--text-dark);
+}
+
+.product-description {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    flex: 1;
+    margin-bottom: 0.75rem;
+}
+
+.product-price {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--green-dark);
+}
+
+.product-stock {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    margin-left: 0.5rem;
+}
+
+.stock-low { color: #e74c3c !important; }
+.stock-ok  { color: var(--green) !important; }
+
+/* ---- Forms ---- */
+.form-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    margin-bottom: 0.35rem;
+}
+
+.form-control, .form-select {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    transition: border-color .2s;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(64,145,108,.15);
+    outline: none;
+}
+
+/* ---- Alerts ---- */
+.alert-fresh-success {
+    background: #e8f5ee;
+    border: 1.5px solid var(--green-light);
+    color: var(--green-dark);
+    border-radius: var(--radius-sm);
+    padding: 0.8rem 1.2rem;
+    font-weight: 500;
+}
+
+.alert-fresh-error {
+    background: #fce8e8;
+    border: 1.5px solid #e74c3c;
+    color: var(--red-soft);
+    border-radius: var(--radius-sm);
+    padding: 0.8rem 1.2rem;
+    font-weight: 500;
+}
+
+/* ---- Tables ---- */
+.table-fresh {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.table-fresh thead th {
+    background: var(--green-dark);
+    color: white;
+    padding: 0.9rem 1rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table-fresh tbody td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+    vertical-align: middle;
+}
+
+.table-fresh tbody tr:hover { background: var(--green-pale); }
+.table-fresh tbody tr:last-child td { border-bottom: none; }
+
+/* ---- Status Badges ---- */
+.badge-fresh {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-pending    { background: var(--amber-light); color: #856404; }
+.badge-confirmed  { background: #cce5ff; color: #004085; }
+.badge-processing { background: #e2d9f3; color: #6f42c1; }
+.badge-shipped    { background: #d1ecf1; color: #0c5460; }
+.badge-delivered  { background: var(--green-pale); color: var(--green-dark); }
+.badge-cancelled  { background: #fce8e8; color: var(--red-soft); }
+
+/* ---- Cart ---- */
+.cart-item {
+    background: white;
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    border: 1px solid var(--border);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: box-shadow .2s;
+}
+
+.cart-item:hover { box-shadow: var(--shadow-sm); }
+
+.cart-item-emoji {
+    font-size: 2.5rem;
+    width: 60px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.cart-total-card {
+    background: var(--green-dark);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 1.8rem;
+}
+
+.cart-total-amount {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+}
+
+/* ---- Order Cards ---- */
+.order-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1rem;
+    transition: all .2s;
+}
+
+.order-card:hover {
+    border-color: var(--green-light);
+    box-shadow: var(--shadow-md);
+}
+
+.order-id {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--green-dark);
+}
+
+/* ---- Auth Pages ---- */
+.auth-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--green-pale) 0%, var(--cream) 100%);
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.auth-logo {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-logo h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--green-dark);
+}
+
+.auth-logo span { color: var(--green); }
+
+.auth-logo .leaf { font-size: 2rem; }
+
+/* ---- Category Pills ---- */
+.category-pill {
+    background: white;
+    border: 1.5px solid var(--border);
+    color: var(--text-mid);
+    padding: 0.4rem 1rem;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0.2rem;
+}
+
+.category-pill:hover, .category-pill.active {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+}
+
+/* ---- Stats Cards ---- */
+.stat-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-number {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--green-dark);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-top: 0.4rem;
+}
+
+/* ---- Page Header ---- */
+.page-header {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
+}
+
+.page-header h2 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--green-dark);
+    margin: 0;
+}
+
+/* ---- Footer ---- */
+footer {
+    background: var(--green-dark);
+    color: rgba(255,255,255,.7);
+    padding: 2rem 0;
+    margin-top: 4rem;
+    text-align: center;
+    font-size: 0.88rem;
+}
+
+footer strong { color: white; }
+
+/* ---- Utilities ---- */
+.text-green-dark { color: var(--green-dark); }
+.bg-cream        { background: var(--cream); }
+.section-gap     { margin-bottom: 3rem; }
+
+/* ---- Quantity Input ---- */
+.qty-input {
+    width: 70px;
+    text-align: center;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.3rem;
+    font-weight: 600;
+}
+
+/* ---- Empty State ---- */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-light);
+}
+
+.empty-state .empty-icon { font-size: 4rem; margin-bottom: 1rem; }
+.empty-state h3 { color: var(--text-mid); font-family: 'Fraunces', serif; }
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .hero-section { padding: 2.5rem 0 2rem; }
+    .product-img-wrap { font-size: 4rem; }
+    .cart-item { flex-wrap: wrap; }
+    .form-card { padding: 1.5rem; }
+}
