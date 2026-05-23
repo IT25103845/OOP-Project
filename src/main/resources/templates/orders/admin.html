@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management – FreshMart Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" th:href="@{/}">Fresh<span>Mart</span> 🛡️</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" th:href="@{/orders/admin}">Orders</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <h2>📦 Order Management</h2>
+  </div>
+</div>
+
+<div class="container pb-5">
+  <div th:if="${success}" class="alert-fresh-success mb-3 auto-dismiss" th:text="${success}"></div>
+
+  <!-- Stats Row -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <div class="stat-card">
+        <div class="stat-number" th:text="${#lists.size(orders)}"></div>
+        <div class="stat-label">Total Orders</div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card">
+        <div class="stat-number" th:text="${pendingCount}"></div>
+        <div class="stat-label">Pending</div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card">
+        <div class="stat-number" th:text="${totalRevenue}"></div>
+        <div class="stat-label">Total Revenue</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Orders Table -->
+  <div style="overflow-x:auto">
+    <table class="table-fresh">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Customer</th>
+          <th>Date</th>
+          <th>Items</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Update Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="o : ${orders}">
+          <td><strong th:text="${o.id}"></strong></td>
+          <td th:text="${o.userName}"></td>
+          <td style="font-size:.82rem" th:text="${o.createdAt}"></td>
+          <td th:text="${#lists.size(o.items)}"></td>
+          <td><strong th:text="${o.formattedTotal}"></strong></td>
+          <td>
+            <span class="badge-fresh" th:classappend="${o.statusBadgeClass}" th:text="${o.status}"></span>
+          </td>
+          <td>
+            <form th:action="@{/orders/admin/status/{id}(id=${o.id})}" method="post"
+                  class="d-flex gap-1" style="min-width:180px">
+              <select name="status" class="form-select form-select-sm" style="font-size:.82rem">
+                <option th:each="s : ${ {'PENDING','CONFIRMED','PROCESSING','SHIPPED','DELIVERED','CANCELLED'} }"
+                        th:value="${s}" th:text="${s}"
+                        th:selected="${s == o.status}"></option>
+              </select>
+              <button type="submit" class="btn-fresh" style="font-size:.8rem;padding:.3rem .7rem;white-space:nowrap">
+                Save
+              </button>
+            </form>
+          </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(orders)}">
+          <td colspan="7" class="text-center text-muted py-4">No orders yet.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer><strong>FreshMart Admin</strong> 🛡️</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details – FreshMart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" th:href="@{/}">Fresh<span>Mart</span> 🌿</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" th:href="@{/orders}">📦 Orders</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <a th:href="@{/orders}" style="color:var(--green);text-decoration:none;font-size:.9rem">← Back to Orders</a>
+    <h2 class="mt-1">Order #<span th:text="${order.id}"></span></h2>
+  </div>
+</div>
+
+<div class="container pb-5" th:if="${order}">
+  <div th:if="${success}" class="alert-fresh-success mb-3 auto-dismiss" th:text="${success}"></div>
+  <div th:if="${error}" class="alert-fresh-error mb-3 auto-dismiss" th:text="${error}"></div>
+
+  <div class="row g-4">
+    <!-- Order Items -->
+    <div class="col-lg-8">
+      <div class="form-card">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 style="font-family:'Fraunces',serif;color:var(--green-dark);margin:0">Items Ordered</h5>
+          <span class="badge-fresh" th:classappend="${order.statusBadgeClass}" th:text="${order.status}"></span>
+        </div>
+
+        <table class="table-fresh" style="margin-bottom:0">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th style="text-align:right">Unit Price</th>
+              <th style="text-align:center">Qty</th>
+              <th style="text-align:right">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="item : ${order.items}">
+              <td>
+                <strong th:text="${item.productName}"></strong>
+              </td>
+              <td style="text-align:right" th:text="${item.formattedUnitPrice}"></td>
+              <td style="text-align:center" th:text="${item.quantity}"></td>
+              <td style="text-align:right;font-weight:700;color:var(--green-dark)"
+                  th:text="${item.formattedSubtotal}"></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3" style="text-align:right;font-weight:700;padding:.9rem 1rem">Total:</td>
+              <td style="text-align:right;font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900;color:var(--green-dark);padding:.9rem 1rem"
+                  th:text="${order.formattedTotal}"></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- Order Info -->
+    <div class="col-lg-4">
+      <div class="form-card mb-3">
+        <h5 style="font-family:'Fraunces',serif;color:var(--green-dark)">Order Info</h5>
+        <table style="width:100%;font-size:.9rem">
+          <tr>
+            <td style="color:var(--text-light);padding:.3rem 0">Order ID</td>
+            <td style="font-weight:600" th:text="'#' + ${order.id}"></td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-light);padding:.3rem 0">Date</td>
+            <td th:text="${order.createdAt}"></td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-light);padding:.3rem 0">Customer</td>
+            <td th:text="${order.userName}"></td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-light);padding:.3rem 0">Status</td>
+            <td>
+              <span class="badge-fresh" th:classappend="${order.statusBadgeClass}" th:text="${order.status}"></span>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="form-card mb-3">
+        <h5 style="font-family:'Fraunces',serif;color:var(--green-dark)">🚚 Delivery Address</h5>
+        <p style="margin:0;color:var(--text-mid)" th:text="${order.deliveryAddress}"></p>
+      </div>
+
+      <!-- Cancel Button -->
+      <form th:if="${order.status != 'CANCELLED' and order.status != 'DELIVERED'}"
+            th:action="@{/orders/cancel/{id}(id=${order.id})}" method="post">
+        <button type="submit" class="btn-danger-soft w-100"
+                onclick="return confirmDelete('Are you sure you want to cancel this order?')">
+          ✕ Cancel Order
+        </button>
+      </form>
+
+      <div th:if="${order.status == 'DELIVERED'}"
+           style="background:var(--green-pale);color:var(--green-dark);text-align:center;padding:.8rem;border-radius:var(--radius-sm);font-weight:600;font-size:.9rem">
+        ✅ Order Delivered
+      </div>
+      <div th:if="${order.status == 'CANCELLED'}"
+           style="background:#fce8e8;color:var(--red-soft);text-align:center;padding:.8rem;border-radius:var(--radius-sm);font-weight:600;font-size:.9rem">
+        ✕ Order Cancelled
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order not found -->
+<div th:unless="${order}" class="empty-state container">
+  <div class="empty-icon">❌</div>
+  <h3>Order Not Found</h3>
+  <a th:href="@{/orders}" class="btn-fresh">Back to Orders</a>
+</div>
+
+<footer>
+  <strong>FreshMart</strong> 🌿 Fresh groceries, delivered with care.
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
