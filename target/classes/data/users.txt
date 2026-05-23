@@ -1,0 +1,7 @@
+# FreshMart Users File
+# Format: id|name|email|password|phone|role|createdAt
+1|Admin User|admin@freshmart.com|admin123|+1-555-000-0001|ADMIN|2025-01-01 09:00
+2|John Silva|john@email.com|pass123|+1-555-123-4567|CUSTOMER|2025-01-10 10:30
+3|Mary Johnson|mary@email.com|pass123|+1-555-234-5678|CUSTOMER|2025-01-15 14:20
+4|David Lee|david@email.com|pass123|+1-555-345-6789|CUSTOMER|2025-01-20 11:00
+5|Sarah Chen|sarah@email.com|pass123|+1-555-456-7890|CUSTOMER|2025-02-01 09:45
