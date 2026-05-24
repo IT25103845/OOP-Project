@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class CheckoutController {
+public class CheckoutController { 
     @Autowired
     private CartService cartService;
 
