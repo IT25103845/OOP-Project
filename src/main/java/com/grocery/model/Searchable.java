@@ -10,7 +10,7 @@ public interface Searchable {
      * Each class implements this differently — demonstrating polymorphism.
      */
     boolean matchesSearch(String query);
-
+ 
     /**
      * Returns a display-friendly string for search results.
      */ 
