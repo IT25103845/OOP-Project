@@ -10,7 +10,7 @@ public class CartItem {
     private String productName;
     private double unitPrice;
     private int quantity;
-
+ 
     public CartItem() {}
 
     public CartItem(String productId, String productName, double unitPrice, int quantity) {
