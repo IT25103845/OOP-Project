@@ -9,7 +9,7 @@ package com.grocery.model;
 public class Product extends BaseEntity implements Searchable {
 
     private String name;
-    private String category;
+    private String category; 
     private double price;
     private int stock;
     private String description;
