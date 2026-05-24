@@ -77,7 +77,7 @@ public class Order extends BaseEntity {
             case "SHIPPED"    -> "badge-shipped";
             case "DELIVERED"  -> "badge-delivered";
             case "CANCELLED"  -> "badge-cancelled";
-            
+            default           -> "badge-pending";
         };
     }
 
