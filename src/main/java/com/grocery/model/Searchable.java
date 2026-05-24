@@ -13,6 +13,6 @@ public interface Searchable {
 
     /**
      * Returns a display-friendly string for search results.
-     */
+     */ 
     String getDisplayName();
 }
