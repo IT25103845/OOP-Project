@@ -9,7 +9,7 @@ public abstract class BaseEntity {
     protected String id;
     protected String createdAt;
 
-    public BaseEntity() {}
+    public BaseEntity() {} 
 
     public BaseEntity(String id, String createdAt) {
         this.id = id;
