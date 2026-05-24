@@ -11,7 +11,7 @@ public class OrderItem {
     private int quantity;
 
     public OrderItem() {}
-
+ 
     public OrderItem(String productId, String productName, double unitPrice, int quantity) {
         this.productId = productId;
         this.productName = productName;
