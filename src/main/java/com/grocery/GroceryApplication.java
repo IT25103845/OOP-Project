@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Uses file-based storage (txt files) for all data persistence.
  */
 @SpringBootApplication
-public class GroceryApplication {
+public class GroceryApplication {  
 
     public static void main(String[] args) {
         SpringApplication.run(GroceryApplication.class, args);
