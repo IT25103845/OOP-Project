@@ -1,4 +1,5 @@
 #!/bin/sh
+<<<<<<< HEAD
 # ----------------------------------------------------------------------------
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
@@ -293,3 +294,10 @@ mv -- "$TMP_DOWNLOAD_DIR/$actualDistributionDir" "$MAVEN_HOME" || [ -d "$MAVEN_H
 
 clean || :
 exec_maven "$@"
+=======
+if command -v mvn >/dev/null 2>&1; then
+  exec mvn "$@"
+fi
+echo "Maven is not installed. Install Maven or open this project in an IDE with Maven support." >&2
+exit 127
+>>>>>>> origin/Payment-checkouts-IT25103841
