@@ -1,5 +1,4 @@
-# FreshMart Products File
-# Format: id|name|category|price|stock|description|imageEmoji|createdAt
+# FreshMart Products - id|name|category|price|stock|description|imageEmoji|createdAt
 1|Basmati Rice (5kg)|Grains|8.99|150|Premium long-grain basmati rice, perfect for biriyani and pilaf|🌾|2025-01-01 09:00
 2|White Sugar (1kg)|Sweeteners|2.49|200|Pure refined white sugar for cooking and baking|🍬|2025-01-01 09:00
 3|Brown Sugar (1kg)|Sweeteners|2.99|180|Natural brown sugar with rich molasses flavour|🟫|2025-01-01 09:00
