@@ -1,6 +1,6 @@
 package com.grocery.model;
 
-/**
+/**  
  * OrderItem represents one product line in a placed order.
  * Separate public class for use across the application.
  */
