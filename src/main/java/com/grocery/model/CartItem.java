@@ -6,6 +6,8 @@ package com.grocery.model;
  */
 public class CartItem {
 
+    
+
     private String productId;
     private String productName;
     private double unitPrice;
