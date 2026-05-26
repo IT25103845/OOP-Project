@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-/**
+/** 
+
  * Component 3: Shopping Cart System.
  * Handles cart viewing, adding products, updating quantities, removing items and clearing the cart.
  */
