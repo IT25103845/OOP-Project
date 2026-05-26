@@ -91,6 +91,6 @@ public class OrderService {
     public long getPendingOrdersCount() {
         return getAllOrders().stream()
                 .filter(order -> "PENDING".equals(order.getStatus()) || "CONFIRMED".equals(order.getStatus()))
-                .count();
+                .count();   
     }
 }
