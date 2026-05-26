@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert.style.opacity = '0';
             alert.style.transition = 'opacity 0.5s';
             setTimeout(() => alert.remove(), 500);
-        }, 4000);
+        }, 4000); 
     });
 });
 
