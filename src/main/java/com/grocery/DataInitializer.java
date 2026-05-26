@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.nio.file.*;
 import java.nio.file.StandardCopyOption;
 
-@Component
+@Component  
 public class DataInitializer implements CommandLineRunner {
     @Value("${app.data.users}") private String usersFile;
     @Value("${app.data.orders}") private String ordersFile;
